@@ -1,0 +1,28 @@
+require 'rubygems'
+require 'commander/import'
+
+require File.dirname(__FILE__) + '/../lib/interfacelift.rb'
+
+# :name is optional, otherwise uses the basename of this executable
+program :name, 'interfacelift'
+program :version, '1.0.0'
+program :description, 'Installs layouts in rails apps'
+
+command :install do |c|
+  c.syntax = 'install theme path'
+  c.description = 'installs theme in rails app'
+  c.action do |args, options|
+    if args.size < 2
+      puts "You need to give the theme name and the path to the rails app" 
+    else
+      begin
+        installer = InterfaceLift::Installer.new(args[1],args[0])
+        installer.install!        
+      rescue Exception => e
+        puts e
+      end      
+    end
+    
+  end
+end
+
