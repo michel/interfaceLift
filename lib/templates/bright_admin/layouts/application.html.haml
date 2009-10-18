@@ -1,0 +1,69 @@
+!!!
+%html{html_attrs}
+  %head
+    %meta{"http-equiv" => 'Content-Type', :content => 'text/html;charset=utf-8'}
+    %title= h(@site_name || "Kabisa Admin")
+    %meta{ :name => "author", :content => "Michel de Graaf" }
+    %meta{ :name => "keywords", :content => "rails rumble" }
+    %meta{ :name => "description", :content => "rails rumble" }    
+    = javascript_include_tag "jquery-1.3.2.min.js", :cache => true                 
+    = javascript_include_tag "jquery.form.js", :cache => true            
+    = javascript_include_tag "formfocus.js", :cache => true                            
+    = javascript_include_tag "jquery.livequery.js", :cache => true                      
+    
+    = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.to_json};" if protect_against_forgery?       
+    = stylesheet_link_tag "reset.css", :cache => true    
+    = stylesheet_link_tag "bright_admin.css", :cache => true           
+    = stylesheet_link_tag "formtastic.css", :cache => true    
+    = stylesheet_link_tag "formtastic_changes.css", :cache => true     
+    = yield :head
+  %body
+    #container
+      #header
+        #panel-top
+          %h1#logo= link_to h(@site_name || "Kabisa Admin") , "/", :title => "Home"  
+          #nav
+            %ul        
+              %li.current= link_to "Dashboard", "/"          
+              %li= link_to "pages", "#"
+              %li= link_to "posts", "#"
+              %li= link_to "comments", "#"
+              %li= link_to "users", "#"
+              %li= link_to "settings", "#"
+      
+          #session 
+            %ul
+              %li 
+                Logged in as  
+                %span.user= "Admin"                 
+              %li.logout= "( #{link_to "Logout", "/logout"} )"
+          .clear
+           
+        #panel-middle          
+          #subnav
+            %ul        
+              %li.current= link_to "Users", "/"     
+              %li= link_to "Customers", "/"          
+                   
+  
+            
+        #panel-bottom
+          #headline
+            %h3= @page_title ||  params[:controller].capitalize   
+            
+ 
+      #application
+        #flash
+          - flash.each do |type, message| 
+            %div{:class =>  "message #{type}" }
+              %p= message        
+        = yield
+ 
+        #footer
+          %p
+            Created for
+            %a{ :href => "http://2009.rubyenrails.nl/", :title => "RubyEnRails Amsterdam 2009" }
+              RubyEnRails Amsterdam 2009
+            Developed by
+            %a{ :href => "http://kabisa.nl", :title => "Kabisa.nl" }
+              Kabisa ICT 
