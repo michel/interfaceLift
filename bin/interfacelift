@@ -32,7 +32,8 @@ command :list do |c|
   c.description = 'shows a list of all available themes'
   c.action do |args, options|       
       begin
-        InterfaceLift::Installer.list        
+        manager = InterfaceLift::ThemeManager.new        
+        manager.available_themes
       rescue Exception => e
         puts e
       end   
