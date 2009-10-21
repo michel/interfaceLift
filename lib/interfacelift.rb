@@ -29,7 +29,7 @@ module  InterfaceLift
     end
     
     def install_images
-      FileUtils.cp_r "#{@theme_path}/images","#{path}/public"  if File.directory?  "#{@theme_path}/images"
+      FileUtils.cp_r "#{@theme_path}/images","#{path}/public"  if File.directory? "#{@theme_path}/images"
     end
     
     def install_stylesheets

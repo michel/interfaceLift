@@ -35,8 +35,7 @@ command :list do |c|
         InterfaceLift::Installer.list        
       rescue Exception => e
         puts e
-      end      
-    
+      end   
   end
 end
 
