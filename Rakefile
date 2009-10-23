@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'rake'
 
+
+
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
@@ -17,12 +19,14 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
+
+require 'spec/rake/spectask'
+desc "Run all specs"
+Spec::Rake::SpecTask.new('spec') do |t|
+  t.spec_files = FileList['spec/*_spec.rb']
+	t.spec_opts = ['--options', "\"spec/spec.opts\""]
 end
+
 
 begin
   require 'rcov/rcovtask'
@@ -36,6 +40,11 @@ rescue LoadError
     abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
   end
 end
+
+
+
+
+
 
 task :test => :check_dependencies
 

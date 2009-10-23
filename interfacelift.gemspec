@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michel de Graaf"]
-  s.date = %q{2009-10-18}
+  s.date = %q{2009-10-23}
   s.default_executable = %q{interfacelift}
   s.description = %q{Collection of cool layouts to use in your rails apps.}
   s.email = %q{michel@re-invention.nl}
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
      "bin/interfacelift",
      "interfacelift.gemspec",
      "lib/.DS_Store",
+     "lib/installer.rb",
      "lib/interfacelift.rb",
      "lib/templates/.DS_Store",
      "lib/templates/bright_admin/.DS_Store",
@@ -1310,13 +1311,23 @@ Gem::Specification.new do |s|
      "lib/templates/web_app/stylesheets/main.css",
      "lib/templates/web_app/stylesheets/style.css",
      "lib/templates/web_app/stylesheets/thickbox.css",
-     "pkg/interfacelift-0.0.0.gem"
+     "lib/theme_manager.rb",
+     "pkg/interfacelift-0.0.0.gem",
+     "spec/installer_spec.rb",
+     "spec/interfacelift_spec.rb",
+     "spec/spec.opts",
+     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/michel/interfacelift}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Installs templates in rails applications}
+  s.test_files = [
+    "spec/installer_spec.rb",
+     "spec/interfacelift_spec.rb",
+     "spec/spec_helper.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
