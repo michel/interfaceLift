@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michel de Graaf"]
-  s.date = %q{2009-10-23}
+  s.date = %q{2009-10-27}
   s.default_executable = %q{interfacelift}
   s.description = %q{Collection of cool layouts to use in your rails apps.}
   s.email = %q{michel@re-invention.nl}
@@ -31,41 +31,6 @@ Gem::Specification.new do |s|
      "lib/interfacelift.rb",
      "lib/templates/.DS_Store",
      "lib/templates/bright_admin/.DS_Store",
-     "lib/templates/bright_admin/images/.DS_Store",
-     "lib/templates/bright_admin/images/add_icon.png",
-     "lib/templates/bright_admin/images/arrow_left.png",
-     "lib/templates/bright_admin/images/bg_btn.gif",
-     "lib/templates/bright_admin/images/edit_icon.png",
-     "lib/templates/bright_admin/images/file.gif",
-     "lib/templates/bright_admin/images/folder-closed.gif",
-     "lib/templates/bright_admin/images/folder.gif",
-     "lib/templates/bright_admin/images/hint.png",
-     "lib/templates/bright_admin/images/invert.png",
-     "lib/templates/bright_admin/images/loadingAnimation.gif",
-     "lib/templates/bright_admin/images/logout.png",
-     "lib/templates/bright_admin/images/minus.gif",
-     "lib/templates/bright_admin/images/plus.gif",
-     "lib/templates/bright_admin/images/rails.png",
-     "lib/templates/bright_admin/images/remove_icon.png",
-     "lib/templates/bright_admin/images/select_all.png",
-     "lib/templates/bright_admin/images/spinner.gif",
-     "lib/templates/bright_admin/images/tick.png",
-     "lib/templates/bright_admin/images/warning.png",
-     "lib/templates/bright_admin/javascripts/.DS_Store",
-     "lib/templates/bright_admin/javascripts/application.js",
-     "lib/templates/bright_admin/javascripts/controls.js",
-     "lib/templates/bright_admin/javascripts/dragdrop.js",
-     "lib/templates/bright_admin/javascripts/effects.js",
-     "lib/templates/bright_admin/javascripts/formfocus.js",
-     "lib/templates/bright_admin/javascripts/jquery-1.3.2.min.js",
-     "lib/templates/bright_admin/javascripts/jquery.form.js",
-     "lib/templates/bright_admin/javascripts/jquery.livequery.js",
-     "lib/templates/bright_admin/javascripts/prototype.js",
-     "lib/templates/bright_admin/layouts/application.html.haml",
-     "lib/templates/bright_admin/stylesheets/bright_admin.css",
-     "lib/templates/bright_admin/stylesheets/formtastic.css",
-     "lib/templates/bright_admin/stylesheets/formtastic_changes.css",
-     "lib/templates/bright_admin/stylesheets/reset.css",
      "lib/templates/shared/.DS_Store",
      "lib/templates/shared/icons/.DS_Store",
      "lib/templates/shared/icons/diagona/.DS_Store",

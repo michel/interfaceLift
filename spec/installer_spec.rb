@@ -49,19 +49,19 @@ describe InterfaceLift::Installer do
     end                  
     
     it "Should copy over existing images to the RAILS_ROOT/public folder" do
-       FileUtils.should_receive(:cp_r).with("#{@theme_path}/images","#{@path}/public")
+       FileUtils.should_receive(:cp_r).with("#{@theme_path}/public/images","#{@path}/public")
     end
     
     it "Should copy over existing stylesheets to the RAILS_ROOT/public folder" do
-      FileUtils.should_receive(:cp_r).with("#{@theme_path}/stylesheets","#{@path}/public")
+      FileUtils.should_receive(:cp_r).with("#{@theme_path}/public/stylesheets","#{@path}/public")
     end
     
     it "Should copy over templates to the RAILS_ROOT/app/views/layout folder" do
-      FileUtils.should_receive(:cp_r).with("#{@theme_path}/layouts","#{@path}/app/views")
+      FileUtils.should_receive(:cp_r).with("#{@theme_path}/app/views/layouts","#{@path}/app/views")
     end      
     
     it "Should copy over javascripts to the RAILS_ROOT/public folder" do
-      FileUtils.should_receive(:cp_r).with("#{@theme_path}/javascripts","#{@path}/public")
+      FileUtils.should_receive(:cp_r).with("#{@theme_path}/public/javascripts","#{@path}/public")
     end
     
     it "Should copy over shared resources to the RAILS_ROOT/public folder" do

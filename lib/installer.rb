@@ -24,19 +24,19 @@ module InterfaceLift
       
       private
       def install_images
-        FileUtils.cp_r "#{@theme_path}/images","#{path}/public"  if File.directory? "#{@theme_path}/images"
+        FileUtils.cp_r "#{@theme_path}/public/images","#{path}/public"  if File.directory? "#{@theme_path}/public/images"
       end
   
       def install_stylesheets
-        FileUtils.cp_r "#{@theme_path}/stylesheets","#{path}/public"  if File.directory?  "#{@theme_path}/stylesheets"                 
+        FileUtils.cp_r "#{@theme_path}/public/stylesheets","#{path}/public"  if File.directory?  "#{@theme_path}/public/stylesheets"                 
       end
   
       def install_layouts
-        FileUtils.cp_r "#{@theme_path}/layouts","#{path}/app/views"  if File.directory?  "#{@theme_path}/layouts"                 
+        FileUtils.cp_r "#{@theme_path}/app/views/layouts","#{path}/app/views"  if File.directory?  "#{@theme_path}/views/layouts"                 
       end
   
       def install_javascript
-        FileUtils.cp_r "#{@theme_path}/javascripts","#{path}/public"  if File.directory?  "#{@theme_path}/javascripts"                 
+        FileUtils.cp_r "#{@theme_path}/public/javascripts","#{path}/public"  if File.directory?  "#{@theme_path}/public/javascripts"                 
       end
   
       def install_shared

@@ -1,0 +1,94 @@
+/* -------------------------------------------------------------------------------------------------
+Load this stylesheet after formtastic.css in your layouts to override the CSS to suit your needs.
+This will allow you to update formtastic.css with new releases without clobbering your own changes.
+For example,to make the inline hint paragraphs a little darker in color than the standard #666:form.formtastic fieldset ol li p.inline-hints{color:#333;}
+--------------------------------------------------------------------------------------------------*/
+/* INLINE HINTS
+--------------------------------------------------------------------------------------------------*/
+
+/* INLINE ERRORS
+--------------------------------------------------------------------------------------------------*/
+form.formtastic fieldset ol li p.inline-errors{color:red;margin:0.5em 0 0 25%;}
+
+form.formtastic fieldset ol li.required label abbr{color:#CE7C34;padding-left:2px;}
+
+
+/* --------------------------------------------------------------------------------------------------*/
+form.formtastic ol li {
+	padding:5px;
+	margin:5px;
+}
+
+.focusField{
+		background-color:#5082B3;
+ }
+
+
+form.formtastic label {
+	font-weight:bold;
+}
+
+
+
+form.formtastic ol li.commit {
+	padding:0px;
+}
+
+form.formtastic ol{
+	border-top: dotted 1px #222222 ;
+}   
+form.formtastic fieldset fieldset ol{
+  border:none;  
+}    
+
+form.formtastic fieldset span {
+	font-size:15px;  
+	color:#82715d;
+	font-weight:bold;
+	padding-top:5px;   
+	padding-bottom:5px;
+	display:block;
+ 	text-transform: capitalize;
+} 
+
+form.formtastic fieldset fieldset span {
+	font-size:12px;   
+	color:#222222;
+
+}
+
+form.formtastic .buttons ol {
+	padding:10px;
+	border:none;             
+	float:right;
+}    
+
+form.formtastic fieldset ol li {
+	padding:10px;
+}               
+form.formtastic .focusField , form.formtastic fieldset ol li.odd.focusField  {
+	background:#FFF7C0;
+}
+
+form.formtastic fieldset ol li.odd {    
+	background:#E7F4F8;
+}   
+
+
+form.formtastic fieldset ol li.error {    
+	background:#ffe5e5;
+}  
+form.formtastic fieldset ol li  p.inline-errors {
+	padding-left:20px;
+	background: url(/images/warning.png) top left no-repeat;  
+} 
+form.formtastic fieldset ol li  p.inline-hints {
+	padding-bottom:5px;	
+	padding-left:20px;      
+	background: url(/images/hint.png) top left no-repeat;  
+}
+
+
+  
+
+
