@@ -41,11 +41,13 @@ describe InterfaceLift::Installer do
       valid_arguments
       @installer = Installer.new(@path,@theme)      
       File.stub!(:directory?).and_return(true)
+      File.stub!(:gob).and_return([])
       FileUtils.stub!(:cp_r)             
     end
     
     after(:each) do 
-      @installer.install!      
+      @installer.install!   
+        
     end                  
     
     it "Should copy over existing images to the RAILS_ROOT/public folder" do

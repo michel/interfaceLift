@@ -23,24 +23,44 @@ module InterfaceLift
       end
       
       private
-      def install_images
-        FileUtils.cp_r "#{@theme_path}/public/images","#{path}/public"  if File.directory? "#{@theme_path}/public/images"
+      def install_images      
+        return  nil unless File.directory? "#{@theme_path}/public/images"      
+        File.gob("#{@theme_path}/public/images/*").each do |file|
+          puts "Installing #{@theme}/public/images/#{file}"
+        end  
+        FileUtils.cp_r "#{@theme_path}/public/images","#{path}/public" 
       end
   
-      def install_stylesheets
+      def install_stylesheets 
+        return  nil unless File.directory? "#{@theme_path}/public/images"      
+        File.gob("#{@theme_path}/public/stylesheets/*").each do |file|
+          puts "Installing #{@theme}/public/stylesheets/#{file}"
+        end
         FileUtils.cp_r "#{@theme_path}/public/stylesheets","#{path}/public"  if File.directory?  "#{@theme_path}/public/stylesheets"                 
       end
   
       def install_layouts
+        return  nil unless File.directory? "#{@theme_path}/app/views/layouts"      
+        File.gob("#{@theme_path}/app/views/layouts/*").each do |file|
+          puts "Installing #{@theme}/app/views/layouts/#{file}"
+        end
         FileUtils.cp_r "#{@theme_path}/app/views/layouts","#{path}/app/views"  if File.directory?  "#{@theme_path}/views/layouts"                 
       end
   
-      def install_javascript
+      def install_javascript 
+        return  nil unless File.directory? "#{@theme_path}/public/javascripts"      
+        File.gob("#{@theme_path}/public/javascripts/*").each do |file|
+          puts "Installing #{@theme}/public/javascripts/#{file}"
+        end
         FileUtils.cp_r "#{@theme_path}/public/javascripts","#{path}/public"  if File.directory?  "#{@theme_path}/public/javascripts"                 
       end
   
-      def install_shared
-        FileUtils.cp_r "#{SHARED}/icons","#{path}/public/images/"  if File.directory?  "#{@theme_path}/icons"                        
+      def install_shared           
+        return  nil unless File.directory? "#{SHARED}/icons"      
+        File.gob("#{SHARED}/icons/*").each do |file|
+          puts "Installing #{SHARED}/icons/#{file}"
+        end
+        FileUtils.cp_r "#{SHARED}/icons","#{path}/public/images/"  if File.directory?  "#{SHARED}/icons"                        
       end       
   end   
 end  
