@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/interfacelift",
+     "interfacelift.gemspec",
      "lib/.DS_Store",
      "lib/installer.rb",
      "lib/interfacelift.rb",

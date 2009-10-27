@@ -41,7 +41,7 @@ describe InterfaceLift::Installer do
       valid_arguments
       @installer = Installer.new(@path,@theme)      
       File.stub!(:directory?).and_return(true)
-      File.stub!(:gob).and_return([])
+      Dir.stub!(:gob).and_return([])
       FileUtils.stub!(:cp_r)             
     end
     
