@@ -1315,7 +1315,6 @@ Gem::Specification.new do |s|
      "lib/templates/web_app/stylesheets/style.css",
      "lib/templates/web_app/stylesheets/thickbox.css",
      "lib/theme_manager.rb",
-     "pkg/interfacelift-0.0.0.gem",
      "spec/installer_spec.rb",
      "spec/interfacelift_spec.rb",
      "spec/spec.opts",
