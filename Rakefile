@@ -6,10 +6,10 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "interfacelift"
     gem.summary = %Q{Installs templates in rails applications}
-    gem.description = %Q{Collection of cool layouts to use in your rails apps.}
+    gem.description = %Q{Installs themes and other layout/interface related resources}
     gem.email = "michel@re-invention.nl"
     gem.homepage = "http://github.com/michel/interfacelift"
-    gem.authors = ["Michel de Graaf"]
+    gem.authors = ["Michel de Graaf","Jeroen van Schagen"]
     gem.add_development_dependency "thoughtbot-shoulda"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end       
@@ -26,17 +26,14 @@ Spec::Rake::SpecTask.new('spec') do |t|
 end
 
 
-begin
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |test|
-    test.libs << 'test'
-    test.pattern = 'test/**/*_test.rb'
-    test.verbose = true
-  end
-rescue LoadError
-  task :rcov do
-    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
-  end
+require 'rake'
+require 'spec/rake/spectask'
+
+desc "Run all examples with RCov"
+Spec::Rake::SpecTask.new('examples_with_rcov') do |t|
+  t.spec_files = FileList['spec/**/*.rb']
+  t.rcov = true
+  t.rcov_opts = ['--exclude', 'examples']
 end
 
                            

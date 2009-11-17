@@ -1,0 +1,6 @@
+- Create a better API for installing themes (see rails template DSL).
+	- Adding code to a file.
+	- Optional theme settings.
+
+- Fetch themes from a webservice or remote GIT repo.
+- Better install control, ask to overwrite files.
