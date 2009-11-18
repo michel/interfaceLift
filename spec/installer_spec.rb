@@ -9,8 +9,8 @@ describe InterfaceLift::Installer do
   end
 
   def valid_arguments
-    File.should_receive(:directory?).with("#{@path}/public").and_return(true)
-    File.should_receive(:directory?).with(@theme_path).and_return(true)
+    File.expects(:directory?).with("#{@path}/public").returns(true)
+    File.expects(:directory?).with(@theme_path).returns(true)
   end
   
   describe "Initialization" do
@@ -23,14 +23,14 @@ describe InterfaceLift::Installer do
     end
   
     it "Should raise an error when there the theme is not available" do
-      File.should_receive(:directory?).with("#{@path}/public").and_return(true)
-      File.should_receive(:directory?).with(@theme_path).and_return(false)     
+      File.expects(:directory?).with("#{@path}/public").returns(true)
+      File.expects(:directory?).with(@theme_path).returns(false)     
       lambda { Installer.new(@path,@theme) }.should raise_error("Theme #{@theme} is not available.")
     end
   
   
     it "Should raise an error when the given path does not contain a rails app " do
-      File.should_receive(:directory?).with("#{@path}/public").and_return(false)
+      File.expects(:directory?).with("#{@path}/public").returns(false)
       lambda { Installer.new(@path,@theme) }.should raise_error("Given path does not contain a rails app.")    
     end          
   end
@@ -40,9 +40,9 @@ describe InterfaceLift::Installer do
       #don't copy files over!
       valid_arguments
       @installer = Installer.new(@path,@theme)      
-      File.stub!(:directory?).and_return(true)
-      Dir.stub!(:glob).and_return([])
-      FileUtils.stub!(:cp_r)             
+      File.stubs(:directory?).returns(true)
+      Dir.stubs(:glob).returns([])
+      FileUtils.stubs(:cp_r)             
     end
     
     after(:each) do 
@@ -51,23 +51,23 @@ describe InterfaceLift::Installer do
     end                  
     
     it "Should copy over existing images to the RAILS_ROOT/public folder" do
-       FileUtils.should_receive(:cp_r).with("#{@theme_path}/public/images","#{@path}/public")
+       FileUtils.expects(:cp_r).with("#{@theme_path}/public/images","#{@path}/public")
     end
     
     it "Should copy over existing stylesheets to the RAILS_ROOT/public folder" do
-      FileUtils.should_receive(:cp_r).with("#{@theme_path}/public/stylesheets","#{@path}/public")
+      FileUtils.expects(:cp_r).with("#{@theme_path}/public/stylesheets","#{@path}/public")
     end
     
     it "Should copy over templates to the RAILS_ROOT/app/views/layout folder" do
-      FileUtils.should_receive(:cp_r).with("#{@theme_path}/app/views/layouts","#{@path}/app/views")
+      FileUtils.expects(:cp_r).with("#{@theme_path}/app/views/layouts","#{@path}/app/views")
     end      
     
     it "Should copy over javascripts to the RAILS_ROOT/public folder" do
-      FileUtils.should_receive(:cp_r).with("#{@theme_path}/public/javascripts","#{@path}/public")
+      FileUtils.expects(:cp_r).with("#{@theme_path}/public/javascripts","#{@path}/public")
     end
     
     it "Should copy over shared resources to the RAILS_ROOT/public folder" do
-      FileUtils.should_receive(:cp_r).with("#{GEM_ROOT}/lib/templates/shared/icons","#{@path}/public/images/")
+      FileUtils.expects(:cp_r).with("#{GEM_ROOT}/lib/templates/shared/icons","#{@path}/public/images/")
     end   
     
   end  
