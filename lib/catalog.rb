@@ -57,6 +57,7 @@ module InterfaceLift
       !Git.clone(repo, "#{@catalog_path}/#{theme}").repo.path.nil?
     end
     
+    #create catalog path when it does not exist
     def create_catalog_path!
        FileUtils.mkdir_p(@catalog_path) unless File.exists?(@catalog_path)
     end

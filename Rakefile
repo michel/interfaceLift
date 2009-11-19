@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'rake'
+require 'spec/rake/spectask'                           
+
    
 begin
   require 'jeweler'
@@ -26,18 +28,14 @@ Spec::Rake::SpecTask.new('spec') do |t|
 	t.spec_opts = ['--options', "\"spec/spec.opts\""]
 end
 
-
-require 'rake'
-require 'spec/rake/spectask'
-
-desc "Run all examples with RCov"
-Spec::Rake::SpecTask.new('examples_with_rcov') do |t|
+desc "Run all specs with RCov"
+Spec::Rake::SpecTask.new('specs_with_rcov') do |t|
   t.spec_files = FileList['spec/**/*.rb']
   t.rcov = true
-  t.rcov_opts = ['--exclude', 'examples']
+  t.rcov_opts = ['--exclude', 'spec', 'spec']
 end
 
-                           
+
 
 task :test => :check_dependencies
 
