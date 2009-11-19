@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "bin/interfacelift",
      "docs/todo.txt",
+     "interfacelift.gemspec",
      "lib/.DS_Store",
      "lib/catalog.rb",
      "lib/fetcher.rb",
