@@ -3,11 +3,10 @@ require 'git'
    
 module InterfaceLift
   class Catalog
-    DEFAULT_CATELOG_PATH =  "~/.interfacelift"
     attr_reader :catalog_path
     
     def initialize(catalog_path = nil)
-      @catalog_path = catalog_path.nil? ? DEFAULT_CATELOG_PATH : catalog_path
+      @catalog_path = catalog_path.nil? ? ::InterfaceLift::DEFAULT_CATALOG_PATH : catalog_path
       create_catalog_path!
     end
     
@@ -22,7 +21,7 @@ module InterfaceLift
     
     # Does the given theme exist in the working path
     def theme_exists?(theme)
-      themes.include?(theme)
+      themes.include?(theme) && git_repo?(theme)
     end
     
     # Is the argumented theme a git repository?
@@ -32,8 +31,8 @@ module InterfaceLift
       rescue ArgumentError => e
         # If the path does not exist it will return an ArgumentError        
         return false
-      end
-      !g.repo.path.nil?
+      end       
+      g.index.readable?
     end
     
     # Retrieve the latest version of argumented theme from git repository
@@ -45,7 +44,6 @@ module InterfaceLift
     
     # Remove theme from catalog
     def remove_theme(theme)
-      return false unless theme_exists?(theme)
       FileUtils.rm_rf("#{@catalog_path}/#{theme}") 
     end
     
@@ -53,7 +51,7 @@ module InterfaceLift
     # returns true when sucessfull
     # raises exception when it fails
     def add_theme(theme, repo)
-      remove_theme(theme) if theme_exists?(theme)
+      remove_theme(theme)
       !Git.clone(repo, "#{@catalog_path}/#{theme}").repo.path.nil?
     end
     

@@ -1,14 +1,12 @@
 module InterfaceLift
   class Installer
       attr_reader :path, :theme, :theme_path
-      APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-      SHARED = "#{APP_ROOT}/lib/templates/shared"
   
   
-      def initialize(path,theme)      
+      def initialize(path,theme,catalog_path=InterfaceLift::DEFAULT_CATALOG_PATH)      
         @path = path
-        @theme = theme 
-        @theme_path =  "#{APP_ROOT}/lib/templates/#{theme}"      
+        @theme = theme     
+        @theme_path =  "#{catalog_path}/#{theme}"      
 
         raise "Given path does not contain a rails app." unless File.directory? "#{@path}/public" 
         raise "Theme #{@theme} is not available." unless File.directory? @theme_path   
@@ -19,7 +17,6 @@ module InterfaceLift
         install_stylesheets
         install_layouts
         install_javascript
-        install_shared  
         theme_install
       end
       
@@ -67,13 +64,6 @@ module InterfaceLift
         end
         FileUtils.cp_r "#{@theme_path}/public/javascripts","#{path}/public"                
       end
-  
-      def install_shared           
-        return  nil unless File.directory? "#{SHARED}/icons"      
-        Dir.glob("#{SHARED}/icons/*").each do |file|
-          puts "Installing icons/#{file.split("/").last}"
-        end
-        FileUtils.cp_r "#{SHARED}/icons","#{path}/public/images/"  
-      end       
+     
   end   
 end  

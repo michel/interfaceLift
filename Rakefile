@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'rake'
-require 'spec/rake/spectask'                           
 
    
 begin
@@ -30,9 +29,10 @@ end
 
 desc "Run all specs with RCov"
 Spec::Rake::SpecTask.new('specs_with_rcov') do |t|
-  t.spec_files = FileList['spec/**/*.rb']
-  t.rcov = true
-  t.rcov_opts = ['--exclude', 'spec', 'spec']
+  t.spec_files = FileList['spec/*_spec.rb']
+  t.rcov = true                             
+  t.spec_opts = ['--options', "\"spec/spec.opts\""]               	
+  t.rcov_opts = ['--exclude', 'spec']
 end
 
 

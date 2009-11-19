@@ -12,12 +12,27 @@ program :description, 'Installs layouts in rails apps'
 command :install do |c|
   c.syntax = 'install theme path'
   c.description = 'installs theme in rails app'
+  c.option '--repo git://repo.git', String, 'Fetch the theme from a git repo'  
   c.action do |args, options|
     if args.size < 1
-      puts "You need to give the theme name and the path to the rails app" 
+      puts "You need to give the theme name." 
     else
       begin
-        installer = InterfaceLift::Installer.new(args[1].nil? ? "." : args[1] ,args[0])
+        theme =  args[0]        
+        path = args[1].nil? ? "." : args[1]                                        
+        catalog = InterfaceLift::Catalog.new 
+        
+        raise "You need to provide the git repo of #{theme}, using the --repo flag" if options.repo.nil?
+        
+        if catalog.theme_exists?(theme)     
+          puts "Fetching updates for #{theme}..."
+          catalog.update_theme(theme)  
+        else                                     
+          puts "Fetching theme #{theme}..."
+          catalog.add_theme(theme,options.repo)            
+        end                       
+            
+        installer = InterfaceLift::Installer.new(path,theme)
         installer.install!        
       rescue Exception => e
         puts e

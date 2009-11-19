@@ -5,7 +5,7 @@ describe InterfaceLift::Installer do
   before(:each) do       
     @path = "/tmp"
     @theme = "test_theme"
-    @theme_path = "#{GEM_ROOT}/lib/templates/#{@theme}"        
+    @theme_path = "#{ENV['HOME']}/.interfacelift/#{@theme}"        
   end
 
   def valid_arguments
@@ -65,10 +65,7 @@ describe InterfaceLift::Installer do
     it "Should copy over javascripts to the RAILS_ROOT/public folder" do
       FileUtils.expects(:cp_r).with("#{@theme_path}/public/javascripts","#{@path}/public")
     end
-    
-    it "Should copy over shared resources to the RAILS_ROOT/public folder" do
-      FileUtils.expects(:cp_r).with("#{GEM_ROOT}/lib/templates/shared/icons","#{@path}/public/images/")
-    end   
+  
     
   end  
   
