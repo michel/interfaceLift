@@ -11,7 +11,8 @@ begin
     gem.email = "michel@re-invention.nl"
     gem.homepage = "http://github.com/michel/interfacelift"
     gem.authors = ["Michel de Graaf","Jeroen van Schagen"]
-    gem.add_dependency  ["commander", "git"]    
+    gem.add_dependency  "commander"
+    gem.add_dependency  "git" 
     gem.add_development_dependency  "thoughtbot-shoulda"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end       
