@@ -9,7 +9,7 @@ program :name, 'interfacelift'
 program :version, InterfaceLift::VERSION
 program :description, 'Installs layouts in rails apps'
 
-# Install
+# Install theme into rails application
 command :install do |c|
   c.syntax = 'install theme path'
   c.description = 'Installs theme in rails app'
@@ -36,11 +36,10 @@ command :install do |c|
         puts e
       end      
     end
-    
   end
 end
 
-# List
+# List installed themes
 command :list do |c|
   c.syntax = 'list'
   c.description = 'Shows a list of all available themes'
@@ -56,7 +55,7 @@ command :list do |c|
   end
 end
 
-# Remove
+# Remove theme from system
 command :remove do |c|
   c.syntax = 'remove theme'
   c.description = 'remove theme from system'
@@ -76,7 +75,7 @@ command :remove do |c|
   end
 end
 
-# Add
+# Add theme to system
 command :add do |c|
   c.syntax = 'add theme'
   c.description = 'fetches theme and store on system'
@@ -97,7 +96,7 @@ command :add do |c|
   end
 end
 
-# Update
+# Update installed theme, from specified repository
 command :update do |c|
   c.syntax = 'update theme'
   c.description = 'retrieves latest version of theme'
