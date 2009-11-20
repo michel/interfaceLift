@@ -29,7 +29,7 @@ describe Catalog do
       themes = ["test_theme", "test_theme2"]
       paths = themes.map { |path| "#{@cat.catalog_path}/#{path}" }
       Dir.stubs(:glob).with("#{@cat.catalog_path}/*").returns(paths)
-      paths.each { |path| @cat.expects(:git_repo?).with(path).returns(true) }
+      themes.each { |theme| @cat.expects(:git_repo?).with(theme).returns(true) }
       @cat.themes.sort.should == themes.sort   
     end
     

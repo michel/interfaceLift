@@ -12,26 +12,25 @@ program :description, 'Installs layouts in rails apps'
 # Install
 command :install do |c|
   c.syntax = 'install theme path'
-  c.description = 'installs theme in rails app'
+  c.description = 'Installs theme in rails app'
   c.option '--repo git://repo.git', String, 'Fetch the theme from a git repo'  
   c.action do |args, options|
     if args.size < 1
-      puts "You need to give the theme name." 
+      puts "You need to specify a theme name."
     else
       begin
+        raise "You need to provide the git repo of #{theme}, using the --repo flag" if options.repo.nil?
+        
         theme =  args[0]        
         path = args[1].nil? ? "." : args[1]
-        
-        # Retrieve theme and store in catalog                                    
         catalog = InterfaceLift::Catalog.new 
-        if ! catalog.theme_exists?(theme)
-          raise "You need to provide the git repo of #{theme}, using the --repo flag" if options.repo.nil?
-          puts "Fetching theme #{theme}..."
-          catalog.add_theme(theme,options.repo)       
-        end                       
+          
+        # Retrieve theme from repository
+        puts "Fetching theme #{theme}..."
+        catalog.add_theme(theme, options.repo)                          
         
         # Transfer theme from catalog in rails app
-        installer = InterfaceLift::Installer.new(path,theme)
+        installer = InterfaceLift::Installer.new(path, theme)
         installer.install!        
       rescue Exception => e
         puts e
@@ -44,15 +43,77 @@ end
 # List
 command :list do |c|
   c.syntax = 'list'
-  c.description = 'shows a list of all available themes'
+  c.description = 'Shows a list of all available themes'
   c.action do |args, options|
     catalog = InterfaceLift::Catalog.new
     themes = catalog.themes
-    if themes.size == 0
+    if themes.empty?
       puts "No themes installed, use 'install' or 'add'"
     else
       puts "Available themes:"
       catalog.themes.each { |theme| puts theme }
+    end
+  end
+end
+
+# Remove
+command :remove do |c|
+  c.syntax = 'remove theme'
+  c.description = 'remove theme from system'
+  c.action do |args, options|
+    if args.size < 1
+      puts "You need to specify a theme name." 
+    else
+      theme = args[0]
+      catalog = InterfaceLift::Catalog.new
+      if catalog.theme_exists?(theme)
+        catalog.remove_theme(theme)
+        puts "Removed theme #{theme}."
+      else
+        puts "Cannot remove theme #{theme}, because it isn't installed."
+      end
+    end
+  end
+end
+
+# Add
+command :add do |c|
+  c.syntax = 'add theme'
+  c.description = 'fetches theme and store on system'
+  c.option '--repo git://repo.git', String, 'Fetch the theme from a git repo' 
+  c.action do |args, options|
+    if args.size < 1
+      puts "You need to specify a theme name." 
+    else
+      # Temporarly requires users to specify a git repository, as the default theme website is still offline
+      raise "You need to provide the git repo of #{theme}, using the --repo flag" if options.repo.nil?
+      
+      theme = args[0]
+      catalog = InterfaceLift::Catalog.new
+      
+      puts "Fetching theme #{theme}..."
+      catalog.add_theme(theme, options.repo)
+    end
+  end
+end
+
+# Update
+command :update do |c|
+  c.syntax = 'update theme'
+  c.description = 'retrieves latest version of theme'
+  c.action do |args, options|
+    if args.size < 1
+      puts "You need to specify a theme name." 
+    else
+      theme = args[0]
+      catalog = InterfaceLift::Catalog.new
+      
+      if catalog.theme_exists?(theme)
+        puts "Updating theme #{theme}..."
+        catalog.update_theme(theme)
+      else
+        puts "Cannot update theme #{theme}, because it isn't installed."
+      end
     end
   end
 end
