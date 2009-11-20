@@ -19,15 +19,15 @@ command :install do |c|
       puts "You need to specify a theme name."
     else
       begin
-        raise "You need to provide the git repo of #{theme}, using the --repo flag" if options.repo.nil?
-        
         theme =  args[0]        
         path = args[1].nil? ? "." : args[1]
         catalog = InterfaceLift::Catalog.new 
           
-        # Retrieve theme from repository
-        puts "Fetching theme #{theme}..."
-        catalog.add_theme(theme, options.repo)                          
+        if ! catalog.theme_exists?(theme)
+          # Retrieve theme from repository
+          puts "Fetching theme #{theme}..."
+          catalog.add_theme(theme, options.repo)
+        end                          
         
         # Transfer theme from catalog in rails app
         installer = InterfaceLift::Installer.new(path, theme)
