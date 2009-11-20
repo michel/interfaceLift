@@ -1,19 +1,18 @@
 require 'rubygems'
 require 'rake'
 
-   
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "interfacelift"
     gem.summary = %Q{Installs templates in rails applications}
     gem.description = %Q{Installs themes and other layout/interface related resources}
-    gem.email = "michel@re-invention.nl"
+    gem.email = [ "michel@re-invention.nl", "jeroen.v.schagen@gmail.com" ]
     gem.homepage = "http://github.com/michel/interfacelift"
     gem.authors = ["Michel de Graaf","Jeroen van Schagen"]
-    gem.add_dependency  "commander"
-    gem.add_dependency  "git" 
-    gem.add_development_dependency  "thoughtbot-shoulda"
+    gem.add_dependency "commander"
+    gem.add_dependency "git" 
+    gem.add_development_dependency "thoughtbot-shoulda"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end       
   Jeweler::GemcutterTasks.new    
@@ -36,10 +35,7 @@ Spec::Rake::SpecTask.new('specs_with_rcov') do |t|
   t.rcov_opts = ['--exclude', 'spec']
 end
 
-
-
 task :test => :check_dependencies
-
 task :default => :test
 
 require 'rake/rdoctask'
@@ -55,4 +51,3 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-

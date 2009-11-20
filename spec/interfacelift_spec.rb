@@ -12,8 +12,4 @@ describe InterfaceLift do
   it "Should have an Installer class" do
     InterfaceLift::Installer.should_not be_nil
   end
-  
-  it "Should have an Theme_manager class" do
-    InterfaceLift::ThemeManager.should_not be_nil    
-  end  
 end
