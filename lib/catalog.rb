@@ -14,14 +14,14 @@ module InterfaceLift
     def themes
       themes = []
       Dir.glob("#{@catalog_path}/*").each do |item|
-        themes << item if File.directory? item
+        themes << item if git_repo?(item)
       end
       themes.map { |path| path.split("/").last }
     end
     
     # Does the given theme exist in the working path
     def theme_exists?(theme)
-      themes.include?(theme) && git_repo?(theme)
+      themes.include?(theme)
     end
     
     # Is the argumented theme a git repository?

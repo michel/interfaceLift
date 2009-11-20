@@ -9,6 +9,7 @@ program :name, 'interfacelift'
 program :version, InterfaceLift::VERSION
 program :description, 'Installs layouts in rails apps'
 
+# Install
 command :install do |c|
   c.syntax = 'install theme path'
   c.description = 'installs theme in rails app'
@@ -19,19 +20,17 @@ command :install do |c|
     else
       begin
         theme =  args[0]        
-        path = args[1].nil? ? "." : args[1]                                        
+        path = args[1].nil? ? "." : args[1]
+        
+        # Retrieve theme and store in catalog                                    
         catalog = InterfaceLift::Catalog.new 
-        
-        raise "You need to provide the git repo of #{theme}, using the --repo flag" if options.repo.nil?
-        
-        if catalog.theme_exists?(theme)     
-          puts "Fetching updates for #{theme}..."
-          catalog.update_theme(theme)  
-        else                                     
+        if ! catalog.theme_exists?(theme)
+          raise "You need to provide the git repo of #{theme}, using the --repo flag" if options.repo.nil?
           puts "Fetching theme #{theme}..."
-          catalog.add_theme(theme,options.repo)            
+          catalog.add_theme(theme,options.repo)       
         end                       
-            
+        
+        # Transfer theme from catalog in rails app
         installer = InterfaceLift::Installer.new(path,theme)
         installer.install!        
       rescue Exception => e
@@ -42,16 +41,18 @@ command :install do |c|
   end
 end
 
+# List
 command :list do |c|
   c.syntax = 'list'
   c.description = 'shows a list of all available themes'
-  c.action do |args, options|       
-      begin
-        manager = InterfaceLift::ThemeManager.new        
-        manager.available_themes
-      rescue Exception => e
-        puts e
-      end   
+  c.action do |args, options|
+    catalog = InterfaceLift::Catalog.new
+    themes = catalog.themes
+    if themes.size == 0
+      puts "No themes installed, use 'install' or 'add'"
+    else
+      puts "Available themes:"
+      catalog.themes.each { |theme| puts theme }
+    end
   end
 end
-

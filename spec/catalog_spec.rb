@@ -26,21 +26,20 @@ describe Catalog do
     end
     
     it "should provide a list of the available themes in the given path" do
-      themes = ["test_theme", "test_theme2", "bright_admin"]   
-      @cat.themes.sort == themes.sort      
-      # (@cat.themes + (themes)).uniq.size.should == 3
+      themes = ["test_theme", "test_theme2"]
+      paths = themes.map { |path| "#{@cat.catalog_path}/#{path}" }
+      Dir.stubs(:glob).with("#{@cat.catalog_path}/*").returns(paths)
+      paths.each { |path| @cat.expects(:git_repo?).with(path).returns(true) }
+      @cat.themes.sort.should == themes.sort   
     end
     
-    
-    it "should check if a theme exists" do  
-      @cat.expects(:git_repo?).with("test_theme2").returns(true)
-      @cat.theme_exists?("test_theme2").should == true
-      @cat.theme_exists?("test_theme3").should == false
+    it "should check if a theme exists" do
+      @cat.stubs(:themes).returns("test_theme")
+      @cat.theme_exists?("test_theme").should == true
+      @cat.theme_exists?("test_theme2").should == false
     end
-    
     
     context "Updating a theme from a git repo" do
-      
       before(:each) do
         @git_mock = mock('Git',:index => mock("index",:readable? => true))
         Git.stubs(:open).returns(@git_mock)
